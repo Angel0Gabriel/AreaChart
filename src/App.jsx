@@ -25,7 +25,7 @@ function App() {
 
   return (
     <ResponsiveContainer
-    className="container"
+      className="container"
       width='100%'
       height={400}
 
@@ -53,7 +53,8 @@ function App() {
           }}
         />
 
-        <YAxis dataKey="value"
+        <YAxis
+          dataKey="value"
           axisLine={false}
           tickLine={false}
           tickCount={8}
