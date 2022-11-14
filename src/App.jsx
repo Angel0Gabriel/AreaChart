@@ -9,6 +9,7 @@ import {
 } from 'recharts';
 
 import { format, parseISO, subDays } from 'date-fns';
+import Form from './components/Form';
 
 
 function App() {
@@ -24,49 +25,53 @@ function App() {
   }
 
   return (
-    <ResponsiveContainer
-      className="container"
-      width='100%'
-      height={400}
+    <>
+      <Form />
+      
+      <ResponsiveContainer
+        className="container"
+        width='100%'
+        height={400}
 
-    >
-      <AreaChart data={data}>
-        <defs>
-          <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='0%' stopColor='#2451B7' stopOpacity={0.4} />
-            <stop offset='100%' stopColor='#2451B7' stopOpacity={0.05} />
-          </linearGradient>
-        </defs>
+      >
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='0%' stopColor='#2451B7' stopOpacity={0.4} />
+              <stop offset='100%' stopColor='#2451B7' stopOpacity={0.05} />
+            </linearGradient>
+          </defs>
 
-        <Area dataKey="value" stroke='#2451B7' fill='url(#color)' />
-        <Area dataKey="value2" stroke='#ad31B7' fill='url(#color)' />
+          <Area dataKey="value" stroke='#2451B7' fill='url(#color)' />
+          <Area dataKey="value2" stroke='#ad31B7' fill='url(#color)' />
 
-        <XAxis dataKey="date"
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={str => {
-            const date = parseISO(str);
-            if (date.getDate() % 7 === 0) {
-              return format(date, "MMM, d")
-            }
-            return "";
-          }}
-        />
+          <XAxis dataKey="date"
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={str => {
+              const date = parseISO(str);
+              if (date.getDate() % 7 === 0) {
+                return format(date, "MMM, d")
+              }
+              return "";
+            }}
+          />
 
-        <YAxis
-          dataKey="value"
-          axisLine={false}
-          tickLine={false}
-          tickCount={8}
-          tickFormatter={number => `$${number.toFixed(2)}`}
-        />
+          <YAxis
+            dataKey="value"
+            axisLine={false}
+            tickLine={false}
+            tickCount={8}
+            tickFormatter={number => `$${number.toFixed(2)}`}
+          />
 
-        <Tooltip content={<CustomToolTip />} />
+          <Tooltip content={<CustomToolTip />} />
 
-        <CartesianGrid opacity={0.1} vertical={false} />
+          <CartesianGrid opacity={0.1} vertical={false} />
 
-      </AreaChart>
-    </ResponsiveContainer>
+        </AreaChart>
+      </ResponsiveContainer>
+    </>
   )
 }
 
